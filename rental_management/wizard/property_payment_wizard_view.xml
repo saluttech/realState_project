@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_payment_wizard_form_view" model="ir.ui.view">
+            <field name="name">property.payment.wizard.form.view</field>
+            <field name="model">property.payment.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="company_id" invisible="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="tenancy_id" invisible="1" />
+                            <field name="customer_id" invisible="1" />
+                            <field name="type" widget="radio" options="{'horizontal':True}"
+                                required="1" />
+                            <field name="description" required="0" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="invoice_date" required="1" />
+                        </group>
+                    </group>
+                    <field name="invoice_line_ids">
+                        <tree editable="bottom">
+                            <field name="service_id" />
+                            <field name="description" />
+                            <field name="on_hand_quantity" readonly="1" />
+                            <field name="initial_meter_reading"
+                                attrs="{'column_invisible': [('parent.type', '!=', 'utility')], 'required': [('parent.type', '=', 'utility')]}" />
+                            <field name="final_meter_reading"
+                                attrs="{'column_invisible': [('parent.type', '!=', 'utility')], 'required': [('parent.type', '=', 'utility')]}" />
+                            <field name="quantity" />
+                            <field name="cost" widget="monetary"
+                                options="{'currency_field': 'currency_id'}" />
+                            <field name="tax_ids" widget="many2many_tags"
+                                options="{'no_create': True}" />
+                            <field name="amount" sum="Total" widget="monetary"
+                                options="{'currency_field': 'currency_id'}" />
+                            <field name="currency_id" invisible="1" />
+                        </tree>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total_amount" widget="monetary"
+                            options="{'currency_field': 'currency_id'}" />
+                    </group>
+                    <footer>
+                        <button string="Create Invoice" type="object" class="btn btn-primary"
+                            name="property_payment_action" />
+                        <button string="Cancel" special="cancel" class="btn btn-secondary" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="property_payment_wizard_action" model="ir.actions.act_window">
+            <field name="name">Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.payment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

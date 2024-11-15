@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_rental" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.rental</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Reminder Days" string="Rent / Sale Reminder"
+                         data-key="rental_management">
+                        <h2>Reminder Days</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Rent Reminder Days</span>
+                                    <div class="text-muted">
+                                        Reminder days for Creating Invoice
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="reminder_days" class="col-lg-3 o_light_label"/>
+                                            <field name="reminder_days" required="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Sale Reminder Days</span>
+                                    <div class="text-muted">
+                                        Reminder days for Creating Invoice
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="sale_reminder_days" class="col-lg-3 o_light_label"/>
+                                            <field name="sale_reminder_days" required="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Invoice Post Type</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Invoice Post</span>
+                                    <div class="text-muted">
+                                        Invoice Post Type
+                                    </div>
+                                    <field name="invoice_post_type" widget="radio"/>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Default Products</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Installment Item</span>
+                                    <div class="text-muted">
+                                        Default Installment Item
+                                    </div>
+                                    <field name="installment_item_id" required="1"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Deposit Item</span>
+                                    <div class="text-muted">
+                                        Default Deposit Item
+                                    </div>
+                                    <field name="deposit_item_id" required="1"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Maintenance Item</span>
+                                    <div class="text-muted">
+                                        Default Maintenance Item
+                                    </div>
+                                    <field name="maintenance_item_id" required="1"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Broker Commission Item</span>
+                                    <div class="text-muted">
+                                        Default Broker Commission Item
+                                    </div>
+                                    <field name="broker_item_id" required="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

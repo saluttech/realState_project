@@ -1,0 +1,18 @@
+<record id="view_real_estate_welcome" model="ir.ui.view">
+    <field name="name">real.estate.welcome</field>
+    <field name="model">real.estate.welcome</field>
+    <field name="arch" type="xml">
+        <form>
+            <div class="o_welcome_image">
+                <img src="/real_estate/static/src/img/welcome_image.png"
+                    alt="Welcome to Real Estate" />
+            </div>
+            <div class="o_welcome_message">
+                <h1>Welcome to Real Estate Management</h1>
+                <p>Get started with managing your properties, clients, and deals.</p>
+                <button name="action_start_onboarding" type="object" string="Start Onboarding"
+                    class="btn-primary" />
+            </div>
+        </form>
+    </field>
+</record>

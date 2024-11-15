@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="contract_wizard_form_view" model="ir.ui.view">
+            <field name="name">contract.wizard.form.view</field>
+            <field name="model">contract.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group string="Price Adjustment"
+                        attrs="{'invisible':[('is_contract_extend','=',False)]}">
+                        <group>
+                            <field name="is_rent_increment" string="Adjusted Rent" />
+                        </group>
+                    </group>
+                    <group
+                        attrs="{'invisible':['|',('is_contract_extend','=',False)
+                        , ('is_rent_increment','=',False)
+                        ]}">
+                        <group string="Current Rent">
+                            <label for="current_rent_type" />
+                            <div>
+                                <field name="current_rent_type" widget="radio"
+                                    options="{'horizontal':True}" />
+                                <div class="font-italic text-muted"
+                                    attrs="{'invisible':[('current_rent_type','!=','area_wise')]}">
+                                    In area-wise pricing types, the incremental rent is calculated
+                                    based on the rent per
+                                    area.
+                                </div>
+                            </div>
+                            <label for="current_area" class="mt-1" />
+                            <div name="current_area">
+                                <field name="current_area" class="oe_inline" force_save="1"
+                                    string="Total Area" /> / <field
+                                    name="measure_unit" class="oe_inline" />
+                            </div>
+                            <field name="price_per_area"
+                                attrs="{'invisible':[('current_rent_type','!=','area_wise')]}" />
+                            <label for="total_rent" string="Rent" readonly="1" />
+                            <div>
+                                <field name="total_rent" required="1" class="oe_inline" readonly="1"
+                                />
+                                / <field
+                                    name="rent_unit" class="oe_inline" />
+                            </div>
+                        </group>
+                        <group string="Adjusted Rent">
+                            <field name="rent_increment_type" widget="radio"
+                                options="{'horizontal':True}" />
+                            <field name="increment_percentage"
+                                attrs="{'invisible':[('rent_increment_type','!=','percentage')]}" />
+                            <field name="increment_amount"
+                                attrs="{'invisible':[('rent_increment_type','!=','fix')]}"
+                                string="Adjustment Amount" />
+                            <field name="incremented_rent_area"
+                                attrs="{'invisible':[('current_rent_type','!=','area_wise')]}" />
+                            <label for="incremented_rent" string="Final Amount" />
+                            <div>
+                                <field name="incremented_rent" required="1" class="oe_inline" />/ <field
+                                    name="rent_unit" class="oe_inline" />
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Lead Details">
+                        <group>
+                            <field name="from_inquiry" />
+                        </group>
+                        <group>
+                            <field name="lead_id"
+                                attrs="{'invisible':[('from_inquiry','=',False)],'readonly':[('is_contract_extend','=',True)],'required':[('from_inquiry','=',True)]}" />
+                        </group>
+                    </group>
+                    <group string="Contract Type">
+                        <group>
+                            <field name="type_contract" />
+                        </group>
+
+                    </group>
+                    <group string="Property Details">
+                        <group>
+                            <field name="is_contract_extend" invisible="1" />
+                            <field name="property_id" readonly="1" force_save="1" />
+                            <field name="company_id" invisible="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="is_extra_service" invisible="1" />
+                            <field name="is_any_maintenance" invisible="1" />
+                        </group>
+                        <group>
+                            <label for="total_rent" string="Rent" readonly="0" />
+                            <div>
+                                <field name="total_rent" required="1" class="oe_inline" readonly="0" />
+                                / <field
+                                    name="rent_unit" class="oe_inline" />
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Utilities &amp; Maintenance"
+                        attrs="{'invisible':[('is_extra_service','=',False),('is_any_maintenance','=',False)]}">
+                        <group attrs="{'invisible':[('is_extra_service','=',False)]}">
+                            <field name="services" string="Addes Utilities" />
+                        </group>
+                        <group attrs="{'invisible':[('is_any_maintenance','=',False)]}">
+                            <field name="maintenance_rent_type" />
+                            <field name="total_maintenance" />
+                        </group>
+                    </group>
+                    <group string="Customer / Tenant">
+                        <group>
+                            <field name="customer_id" required="1"
+                                attrs="{'readonly':[('is_contract_extend','=',True)]}"
+                                options="{'no_quick_create':True}" />
+                        </group>
+                    </group>
+                    <group string="Contract Details">
+                        <group>
+                            <label for="payment_term" />
+                            <div>
+                                <field name="payment_term" required="1"
+                                    attrs="{'readonly':[('rent_unit','in',['Day','Year'])]}" />
+                                <div class="font-italic text-muted"
+                                    attrs="{'invisible':[('payment_term','!=','quarterly')]}">
+                                    * 3 Month Quarter
+                                </div>
+                            </div>
+                            <field name="duration_ids" invisible="1" />
+                            <field name="duration_id" required="1"
+                                options="{'no_create':True,'no_create_edit':True,'no_open':True}" />
+                        </group>
+                        <group>
+                            <field name="start_date" required="1" />
+
+                        </group>
+                    </group>
+                    <group string="Security Deposit">
+                        <group>
+                            <field name="is_any_deposit" />
+                        </group>
+                        <group>
+                            <field name="deposit_amount"
+                                attrs="{'invisible':[('is_any_deposit','=',False)],'required':[('is_any_deposit','=',True)]}" />
+                        </group>
+                    </group>
+                    <group string="Broker Details">
+                        <group>
+                            <field name="is_any_broker" />
+                        </group>
+                    </group>
+                    <group attrs="{'invisible':[('is_any_broker','=',False)]}">
+                        <group>
+                            <field name="broker_id"
+                                options="{'no_create':True,'no_create_edit':True}"
+                                attrs="{'required':[('is_any_broker','=',True)]}" />
+                            <field name="commission_from" widget="radio"
+                                options="{'horizontal': true}"
+                                attrs="{'required':[('is_any_broker','=',True)]}" />
+                            <field name="rent_type"
+                                attrs="{'required':[('is_any_broker','=',True)]}"
+                                widget="radio"
+                                options="{'horizontal': true}" />
+                        </group>
+                        <group>
+                            <field name="commission_type"
+                                attrs="{'required':[('is_any_broker','=',True)]}"
+                                widget="radio" options="{'horizontal': true}" />
+                            <field name="broker_commission_percentage"
+                                attrs="{'invisible':[('commission_type','!=','p')],'required':[('commission_type','=','p')]}" />
+                            <field name="broker_commission" widget="monetary"
+                                attrs="{'invisible':[('commission_type','!=','f')],'required':[('commission_type','=','f')]}" />
+                        </group>
+                    </group>
+                    <group string="Taxes">
+                        <group>
+                            <field name="instalment_tax" />
+                            <field name="deposit_tax"
+                                attrs="{'invisible':[('is_any_deposit','=',False)]}" />
+                            <field name="service_tax"
+                                attrs="{'invisible':[('is_extra_service','=',False)]}" />
+                        </group>
+                        <group
+                            attrs="{'invisible':[('instalment_tax','=',False),('deposit_tax','=',False),('service_tax','=',False)]}">
+                            <field name="tax_ids" widget="many2many_tags"
+                                attrs="{'required':['|',('instalment_tax','=',True),'|',('deposit_tax','=',True),('service_tax','=',True)]}" />
+                        </group>
+                    </group>
+                    <group string="Installment Item">
+                        <group>
+                            <field name="installment_item_id" required="1" />
+                            <field name="deposit_item_id"
+                                attrs="{'invisible':[('is_any_deposit','=',False)],'required':[('is_any_deposit','=',True)]}" />
+                        </group>
+                        <group>
+                            <field name="broker_item_id"
+                                attrs="{'invisible':[('is_any_broker','=',False)],'required':[('is_any_broker','=',True)]}" />
+                            <field name="maintenance_item_id"
+                                attrs="{'invisible':[('is_any_maintenance','=',False)],'required':[('is_any_maintenance','=',True)]}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lead Note" attrs="{'invisible':[('lead_id','=',False)]}">
+                            <field name="note" widget="html" readonly="1" placeholder="Lead Notes" />
+                        </page>
+                        <page string="Agreement">
+                            <group string="Template">
+                                <group>
+                                    <field name="agreement_template_id" />
+                                </group>
+                            </group>
+                            <field name="agreement" placeholder="Rental Agreement." />
+                        </page>
+                        <page string="Terms &amp; Conditions">
+                            <field name="term_condition" placeholder="Terms &amp; Conditions"
+                                widget="html" />
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Create Contract" type="object"
+                            class="btn btn-outline-success"
+                            name="contract_action"
+                            attrs="{'invisible':[('payment_term','=','full_payment')]}" />
+                        <button string="Create Invoice" type="object"
+                            class="btn btn-outline-success"
+                            name="contract_action"
+                            attrs="{'invisible':[('payment_term','!=','full_payment')]}" />
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="contract_wizard_action" model="ir.actions.act_window">
+            <field name="name">Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contract.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

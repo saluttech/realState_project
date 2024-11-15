@@ -1,0 +1,43 @@
+<record id="real_estate_onboarding_view" model="ir.ui.view">
+    <field name="name">real.estate.onboarding.form</field>
+    <field name="model">res.company</field>
+    <field name="arch" type="xml">
+        <form string="Real Estate Onboarding">
+            <div class="o_onboarding_container">
+                <div class="o_onboarding">
+                    <div class="o_onboarding_step"
+                        attrs="{'invisible': [('real_estate_onboarding_property_state', '!=', 'not_done')]}">
+                        <field name="real_estate_onboarding_property_state" invisible="1" />
+                        <button name="action_onboarding_property_layout" type="object"
+                            class="btn btn-primary">Add a Property</button>
+                    </div>
+                    <div class="o_onboarding_step"
+                        attrs="{'invisible': [('real_estate_onboarding_client_state', '!=', 'not_done')]}">
+                        <field name="real_estate_onboarding_client_state" invisible="1" />
+                        <button name="action_onboarding_client_layout" type="object"
+                            class="btn btn-primary">Add a Client</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </field>
+    <record id="action_real_estate_welcome" model="ir.actions.act_window">
+        <field name="name">Welcome to Real Estate</field>
+        <field name="res_model">real.estate.welcome</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_real_estate_onboarding" model="ir.actions.act_window">
+        <field name="name">Real Estate Onboarding</field>
+        <field name="res_model">res.company</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="real_estate_onboarding_view" />
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_real_estate_root" name="Real Estate"
+        web_icon="real_estate,static/description/icon.png" sequence="10" />
+    <menuitem id="menu_real_estate_welcome" name="Get Started" parent="menu_real_estate_root"
+        action="action_real_estate_welcome" sequence="1" />
+</record>
