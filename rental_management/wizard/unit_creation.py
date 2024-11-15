@@ -80,7 +80,7 @@ class UnitCreation(models.TransientModel):
         property_static_rec = {
             'total_floor': self.total_floors,
             'property_subtype_id': project_id.property_subtype_id.id,
-            'landlord_id': project_id.landlord_ids[0].id if project_id.landlord_ids else False,
+            'landlord_id': project_id.landlord_ids[0].partner_id.id if project_id.landlord_ids else False,
             'type': project_id.property_type,
             'street': project_id.street,
             'street2': project_id.street2,

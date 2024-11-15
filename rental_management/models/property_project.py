@@ -36,9 +36,8 @@ class PropertyProject(models.Model):
                                ("cancel", "Cancel"),
                                ("closed", "Closed"), ],
                               default="draft")
-    landlord_ids = fields.Many2many("res.partner",
-                                  string="Landlords",
-                                  domain="[('user_type','=','landlord')]")
+    landlord_ids = fields.One2many("landlord.partner",'project_id',
+                                  string="Landlords")
     # Company & Currency
     company_id = fields.Many2one("res.company",
                                  string="Company", default=lambda self: self.env.company,

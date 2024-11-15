@@ -25,14 +25,6 @@ class UserTypes(models.Model):
     # Broker Fields
     tenancy_ids = fields.One2many('tenancy.details', 'broker_id', string='Tenancy ')
     property_sold_ids = fields.One2many('property.vendor', 'broker_id', string="Sold Commission")
-    ownership_percentage = fields.Char('Ownership %')
-
-    def name_get(self):
-        result = []
-        for record in self:
-            display_name = f"{record.name}:owner({record.ownership_percentage}%)"
-            result.append((record.id, display_name))
-        return result
     @api.depends('properties_ids')
     def _compute_properties_count(self):
         for rec in self:

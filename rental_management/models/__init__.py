@@ -11,4 +11,5 @@ from . import res_config
 from . import crm_lead
 from . import property_region
 from . import property_project
-from . import property_sub_project 
+from . import property_sub_project
+from . import landlord_partner

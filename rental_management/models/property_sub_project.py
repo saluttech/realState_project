@@ -18,7 +18,7 @@ class PropertySubProject(models.Model):
     image_1920 = fields.Image(string="Image")
     property_project_id = fields.Many2one("property.project",
                                           string="Project")
-    computed_landlord_ids = fields.Many2many("res.partner", compute="_compute_landlord_ids",
+    computed_landlord_ids = fields.One2many("landlord.partner",'project_id', compute="_compute_landlord_ids",
                                     string="Landlords")
 
     project_for = fields.Selection(
