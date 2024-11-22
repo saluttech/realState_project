@@ -14,4 +14,7 @@ class LandLordPartner(models.Model):
     project_id = fields.Many2one('property.project')
     partner_id = fields.Many2one('res.partner',domain="[('user_type','=','landlord')]")
     ownership = fields.Integer()
+    property_id = fields.Many2one('property.details')
+    landlord_phone = fields.Char(string="Phone", related="partner_id.phone")
+    landlord_email = fields.Char(string="Email", related="partner_id.email")
 

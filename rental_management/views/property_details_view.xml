@@ -139,11 +139,15 @@
                                 </div>
                             </group>
                             <group string="Owner Details">
-                                <field name="landlord_id"
-                                    options="{'no_quick_create':True,'no_create_edit':True}"
-                                    required="1" />
-                                <field name="landlord_phone" />
-                                <field name="landlord_email" />
+                                <field name="landlord_ids" widget="one2many">
+                                    <tree editable="bottom">
+                                        <field name="partner_id" string="Landlord name"/>
+                                        <field name="ownership" string="Ownership %"/>
+                                        <field name="property_id" invisible="1"/>
+                                        <field name="landlord_phone" />
+                                        <field name="landlord_email" />
+                                    </tree>
+                                </field>
                                 <field name="website" widget="url" />
                             </group>
                         </group>
@@ -741,7 +745,7 @@
                     <field name="name" />
                     <field name="type" />
                     <field name="property_subtype_id" />
-                    <field name="landlord_id" />
+                    <field name="landlord_ids" />
                     <field name="sale_lease" widget="badge"
                         decoration-info="sale_lease == 'for_sale'"
                         decoration-warning="sale_lease == 'for_tenancy'" />

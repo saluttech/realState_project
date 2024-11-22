@@ -59,11 +59,14 @@ class TenancyDetails(models.Model):
     # Landlord
     property_landlord_id = fields.Many2one(related='property_id.landlord_id',
                                            string='Landlord', store=True)
-    landlord_phone = fields.Char(related='property_landlord_id.phone',
-                                 string="Landlord Phone")
-    landlord_email = fields.Char(related='property_landlord_id.email',
-                                 string="Landlord Email")
+    # landlord_phone = fields.Char(related='property_landlord_id.phone',
+    #                              string="Landlord Phone")
+    # landlord_email = fields.Char(related='property_landlord_id.email',
+    #                              string="Landlord Email")
     # Customer / Tenant
+    computed_landlord_ids = fields.One2many("landlord.partner",'property_id', compute="_compute_landlord_ids",
+                                            string="Landlords")
+
     tenancy_id = fields.Many2one('res.partner', string='Tenant',
                                  domain=[('user_type', '=', 'customer')])
     customer_phone = fields.Char(related="tenancy_id.phone",
@@ -192,6 +195,10 @@ class TenancyDetails(models.Model):
     invoice_count = fields.Integer(string='Invoice Count',
                                    compute="_compute_invoice_count")
 
+    @api.depends('property_id.landlord_ids')
+    def _compute_landlord_ids(self):
+        for record in self:
+            record.computed_landlord_ids = record.property_id.landlord_ids
     # Create, Write, Name get...
     @api.model_create_multi
     def create(self, vals_list):

@@ -198,9 +198,16 @@
                                 <field name="customer_email" string="Email" />
                             </group>
                             <group string="Landlord">
-                                <field name="property_landlord_id" force_save="1" />
-                                <field name="landlord_phone" string="Phone" />
-                                <field name="landlord_email" string="Email" />
+                                <field name="computed_landlord_ids" widget="one2many">
+                                    <tree editable="bottom">
+                                        <field name="partner_id" string="Landlord name"/>
+                                        <field name="ownership" string="Ownership %"/>
+                                        <field name="project_id" invisible="1"/>
+                                    </tree>
+                                </field>
+<!--                                <field name="property_landlord_id" force_save="1" />-->
+<!--                                <field name="landlord_phone" string="Phone" />-->
+<!--                                <field name="landlord_email" string="Email" />-->
                             </group>
                         </group>
                         <group string="Broker Details"

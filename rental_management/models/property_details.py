@@ -83,8 +83,9 @@ class PropertyDetails(models.Model):
     landlord_id = fields.Many2one('res.partner',
                                   string='LandLord',
                                   domain=[('user_type', '=', 'landlord')])
-    landlord_phone = fields.Char(string="Phone", related="landlord_id.phone")
-    landlord_email = fields.Char(string="Email", related="landlord_id.email")
+    landlord_ids = fields.One2many("landlord.partner",'property_id', string="Landlords")
+    # landlord_phone = fields.Char(string="Phone", related="landlord_id.phone")
+    # landlord_email = fields.Char(string="Email", related="landlord_id.email")
     website = fields.Char(string='Website', translate=True)
 
     # Property Tags
